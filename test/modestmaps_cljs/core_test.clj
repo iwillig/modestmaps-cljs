@@ -1,7 +1,15 @@
 (ns modestmaps-cljs.core-test
-  (:require [clojure.test :refer :all]
-            [modestmaps-cljs.core :refer :all]))
+  (:require
+   [clojure.test :refer :all]
+   [modestmaps-cljs.core :refer :all]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+
+(deftest test-coordinate
+  (testing "#Coordinate{:row 10 :column 10 :zoom 1}"
+    (testing "(container coordinate)")
+    (testing "(zoom-to coordinate)")
+    (testing "(zoom-by coordinate")
+    (testing "(up coordinate)")
+    (testing "(right coordinate")
+    (testing "(down coordinate")
+    (testing "(left coordinate)")))
