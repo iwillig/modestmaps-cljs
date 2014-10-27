@@ -15,7 +15,7 @@
   (left      [self distance]))
 
 
-(defrecord Coordinate [row column zoom]
+(defrecord Coordinate [col row zoom]
   ICoordinate
 
   (container [self]
