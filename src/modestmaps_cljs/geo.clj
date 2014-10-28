@@ -1,10 +1,8 @@
 (ns modestmaps-cljs.geo
   (:require
-   [modestmaps-cljs.core :refer [->Point ->Coordinate zoom-to]])
+   [modestmaps-cljs.core :refer [->Point ->Coordinate zoom-to ->Location]])
   (:import
    [java.lang Math]))
-
-(defrecord Locaiton [lat lon])
 
 (defprotocol ITransformation
   (transform   [self point])
