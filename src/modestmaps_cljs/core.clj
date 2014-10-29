@@ -6,31 +6,53 @@
 (defrecord Location [lat lon])
 
 (defprotocol IExtent
-  (get-north-west        [self])
-  (get-south-east        [self])
-  (get-north-east        [self])
-  (get-south-west        [self])
-  (get-center            [self])
-  (enclose-location  [self])
-  (from-locations    [self locations])
-  (enclose-extent    [self extent])
-  (contains-location [self location]))
+  (north-west        [self])
+  (south-east        [self])
+  (north-east        [self])
+  (south-west        [self])
+  (center            [self])
 
+  (enclose-location  [self location])
+  (enclose-locations [self locations])
+  (enclose-extent    [self other])
+  (contains-location? [self location]))
 
 (defrecord Extent [north west south east]
   IExtent
-  (get-north-west [self]
+  (north-west [self]
     (->Location north west))
-  (get-south-east [self]
+  (south-east [self]
     (->Location south east))
-  (get-north-east [self]
+  (north-east [self]
     (->Location north east))
-  (get-south-west [self]
+  (south-west [self]
     (->Location south west))
-  (get-center [self]
+  (center [self]
     (->Location
      (+ south (* (- north south) 0.5))
-     (+ east (* (- west east) 0.5)))))
+     (+ east (* (- west east) 0.5))))
+
+  (enclose-location [self location]
+    (->Extent (Math/max (:lat location) north)
+              (Math/min (:lon location) west)
+              (Math/min (:lat location) south)
+              (Math/max (:lon location) east)))
+
+  (enclose-locations [self locations]
+    (reduce #(enclose-location %1 %2) self locations))
+
+  (enclose-extent [self other]
+    (->Extent (Math/max north (:north other))
+              (Math/min south (:sourth other))
+              (Math/max east  (:east other))
+              (Math/min west  (:west other))))
+
+  (contains-location? [self location]
+    (and (>= (:lat location) south)
+         (<= (:lat location) north)
+         (>= (:lon location) west)
+         (<= (:lon location) east))))
+
 
 (defn make-extent [north west south east]
   (->Extent (Math/max north south)
@@ -40,12 +62,17 @@
 
 (defprotocol IPoint
   (distance    [self other])
-  (interpolate [self other]))
+  (interpolate [self other t]))
 
 (defrecord Point [x y]
   IPoint
-  (distance    [self other])
-  (interpolate [self other]))
+  (distance    [self other]
+    (Math/sqrt (+ (Math/pow (- (:x other) x) 2)
+                  (Math/pow (- (:y other) y) 2))))
+
+  (interpolate [self other t]
+    (->Point (* (+ x (- (:x other) x)) t)
+             (* (+ y (- (:y other) y)) t))))
 
 (defprotocol ICoordinate
   (container [self])
