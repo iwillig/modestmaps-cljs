@@ -3,7 +3,6 @@
    [clojure.test :refer :all]
    [modestmaps.core :refer :all]))
 
-
 (deftest test-coordinate
   (let [coordinate (->Coordinate 0.00 1.00 2.00)]
     (testing "#Coordinate{:row 0 :column 1 :zoom 2}"

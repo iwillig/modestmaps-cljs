@@ -5,6 +5,6 @@
   :license {:name ""
             :url ""}
 
-  :plugins [[cider/cider-nrepl "0.7.0"]]
+  :plugins [[cider/cider-nrepl "0.8.0-SNAPSHOT"]]
 
   :dependencies [[org.clojure/clojure "1.6.0"]])
