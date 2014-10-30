@@ -1,8 +1,9 @@
-(ns modestmaps-cljs.geo-test
+(ns modestmaps.geo-test
   (:require
    [clojure.test         :refer :all]
-   [modestmaps-cljs.core :refer [->Point ->Coordinate]]
-   [modestmaps-cljs.geo  :refer :all]))
+   [modestmaps.core :refer [->Point ->Coordinate ->Location]]
+   [modestmaps.transformation :refer [->Transformation transform untransform]]
+   [modestmaps.geo  :refer :all]))
 
 
 (deftest test-location

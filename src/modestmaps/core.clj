@@ -1,7 +1,13 @@
-(ns modestmaps-cljs.core
+(ns modestmaps.core
   (:import [java.lang Math]))
 
 (def max-zoom 25)
+
+
+(defn format-tile [layer coordinate] chan)
+(defn generate-tiles [layer chan])
+(defn draw-tile [layer chan])
+
 
 (defrecord Location [lat lon])
 

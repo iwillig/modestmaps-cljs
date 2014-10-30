@@ -1,7 +1,7 @@
-(ns modestmaps-cljs.core-test
+(ns modestmaps.core-test
   (:require
    [clojure.test :refer :all]
-   [modestmaps-cljs.core :refer :all]))
+   [modestmaps.core :refer :all]))
 
 
 (deftest test-coordinate

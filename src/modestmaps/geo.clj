@@ -1,40 +1,9 @@
-(ns modestmaps-cljs.geo
+(ns modestmaps.geo
   (:require
-   [modestmaps-cljs.core :refer [->Point ->Coordinate zoom-to ->Location]])
+   [modestmaps.transformation :refer [transform untransform ->Transformation]]
+   [modestmaps.core :refer [->Point ->Coordinate zoom-to ->Location]])
   (:import
    [java.lang Math]))
-
-(defprotocol ITransformation
-  (transform   [self point])
-  (untransform [self point]))
-
-
-(defrecord Transformation [ax bx cx ay by cy]
-  ITransformation
-  (transform   [self point]
-    (->Point (+ (* (:ax self) (:x point))
-                (* (:bx self) (:y point))
-                (:cx self))
-             (+ (* (:ay self) (:x point))
-                (* (:by self) (:y point))
-                (:cy self))))
-
-  (untransform [self point]
-    (->Point (/  (+ (- (* (:x point) (:by self))
-                       (* (:y point) (:bx self))
-                       (* (:cx self) (:by self)))
-                    (* (:cy self) (:bx self)))
-
-                 (- (* (:ax self) (:by self))
-                    (* (:ay self) (:bx self))))
-             (/
-              (+ (- (* (:x point) (:ay self))
-                    (* (:y point) (:ax self))
-                    (* (:cx self) (:ay self)))
-                 (* (:cy self) (:ax self)))
-
-              (- (* (:bx self) (:ay self))
-                 (* (:by self) (:ax self)))))))
 
 (defn linear-solution
   [r1 s1 t1 r2 s2 t2 r3 s3 t3]
