@@ -3,7 +3,6 @@
 
 (def max-zoom 25)
 
-
 (defrecord Location [lat lon])
 
 (defprotocol IExtent
