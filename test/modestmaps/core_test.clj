@@ -29,3 +29,29 @@
         (is (= (left coordinate 1.0) (->Coordinate 0.00 0.00 2.00)))))))
 
 
+(deftest test-extent
+  (let [ext (make-extent -10 -10 10 10)]
+    (testing "properly initializes its sides"
+      (are [x y] (= x y)
+           (:west ext)  -10
+           (:south ext) -10
+           (:north ext)  10
+           (:east ext)   10))
+
+    (testing "expands to fit a location"
+      (let [ext (enclose-location ext (->Location -40 -40))]
+        (is (= (:west ext) -40))
+        (is (= (:south ext) -40))))
+
+    (testing "expands to fit many locations"
+      (let [ext (enclose-locations ext [(->Location -40 -40)
+                                        (->Location  40  40)])]
+        (is (= (:west ext) -40))
+        (is (= (:east ext) 40))
+        (is (= (:south ext) -40))
+        (is (= (:north ext) 40))))
+
+    (testing "knows when it contains a location"
+      (is (contains-location? ext (->Location 0 0)))
+      (is (not (contains-location? ext (->Location 0 90)))))))
+

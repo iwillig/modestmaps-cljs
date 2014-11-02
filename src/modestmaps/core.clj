@@ -61,10 +61,12 @@
 
 
 (defn make-extent [north west south east]
-  (->Extent (Math/max north south)
-            (Math/min north south)
-            (Math/max east west)
-            (Math/min east west)))
+  (map->Extent
+   {:north (Math/max north south)
+    :south (Math/min north south)
+    :east  (Math/max east west)
+    :west  (Math/min east west)}))
+
 
 (defprotocol IPoint
   (distance    [self other])

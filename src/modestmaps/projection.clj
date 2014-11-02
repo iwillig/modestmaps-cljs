@@ -16,7 +16,7 @@
   (project             [self point])
   (unproject           [self point])
   (location-coordinate [self location])
-  (coodrinate-location [self coordinate]))
+  (coordinate-location [self coordinate]))
 
 
 (def abstract-projection-impl
