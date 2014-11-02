@@ -18,6 +18,7 @@
       (for [row (range limit)]
         (->Coordinate zoom col row)))))
 
+
 ;; http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
 (defn num->deg
   [xtile ytile zoom]
@@ -36,12 +37,10 @@
         xtile   (* (/ (+ lat 180)
                       360)
                    n)
-;;     int((1.0 - math.log(math.tan(lat_rad) + (1 / math.cos(lat_rad))) / math.pi) / 2.0 * n)
         ytile   (* (/ (/ (- 1 (Math/log (+
                                             (Math/tan lat-rad)
                                             (/ 1 (Math/cos lat-rad)))))
-                          Math/PI) 2) n)
-        ]
+                          Math/PI) 2) n)]
     [xtile ytile]))
 
 

@@ -7,4 +7,5 @@
 
   :plugins [[cider/cider-nrepl "0.8.0-SNAPSHOT"]]
 
-  :dependencies [[org.clojure/clojure "1.6.0"]])
+  :dependencies [[org.clojure/clojure "1.6.0"]
+                 [org.clojure/math.numeric-tower "0.0.4"]])

@@ -15,7 +15,13 @@
   (enclose-location  [self location])
   (enclose-locations [self locations])
   (enclose-extent    [self other])
+
+
+  (is-valid? [self])
+  (intersects? [self other])
+  (contains-bounds? [self other])
   (contains-location? [self location]))
+
 
 (defrecord Extent [north west south east]
   IExtent

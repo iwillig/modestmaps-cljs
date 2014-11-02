@@ -1,9 +1,9 @@
 (ns modestmaps.geo-test
   (:require
-   [clojure.test         :refer :all]
-   [modestmaps.core :refer [->Point ->Coordinate ->Location]]
+   [clojure.test              :refer :all]
+   [modestmaps.core           :refer [->Point ->Coordinate ->Location]]
    [modestmaps.transformation :refer [->Transformation transform untransform]]
-   [modestmaps.projection :refer :all]))
+   [modestmaps.projection     :refer :all]))
 
 
 (deftest test-transformation
@@ -31,8 +31,5 @@
       (is (= (untransform t (->Point 1 1))
              (->Point 0 0))))))
 
-(deftest test-mercator-projection
-  (let [m (->MercatorProjection 10 (->Transformation 1 0 0 0 1 0))]
-    (is (= (location-coordinate m (->Location 0 0))
-           (->Coordinate 0 0 10)))))
+
 
